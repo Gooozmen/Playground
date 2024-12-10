@@ -7,12 +7,9 @@
   </PropertyGroup>
 
   <PropertyGroup>
+    <OutputPath>..\..\Output\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <BaseOutputPath>..\..\Output</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
