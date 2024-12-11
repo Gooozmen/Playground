@@ -11,7 +11,6 @@ public static class MiddlewareExtensions
         app.UseMiddleware<DistributionMiddleware>();
         app.UseMiddleware<AccessMiddleware>();
 
-
         return app;
     }
 }

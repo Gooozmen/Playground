@@ -3,9 +3,9 @@ using Middleware.Entities;
 
 namespace Middleware.Extensions;
 
-public static class ServiceRegistrationExtensions
+public static class MiddlewareRegistrationExtensions
 {
-    public static IServiceCollection ConfigureMiddlewareServices(this IServiceCollection services)
+    public static IServiceCollection RegisterMiddlewareServices(this IServiceCollection services)
     {
         services.AddTransient<BasicMiddleware>();
         services.AddTransient<DistributionMiddleware>();
