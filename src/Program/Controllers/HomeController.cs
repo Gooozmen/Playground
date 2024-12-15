@@ -1,12 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Presentation.Controllers.Core;
 
-namespace Playground.Controllers;
+namespace Presentation.Controllers;
 
-public class HomeController : Controller
+public class HomeController : CoreController
 {
+    [Route("Access")]
     public IActionResult Index()
     {
-
         return Ok();
     }
 }

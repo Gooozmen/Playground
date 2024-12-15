@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Middleware.Entities;
+using Infrastructure.Entities;
 
-namespace Middleware.Extensions;
+namespace Infrastructure.Extensions;
 
 public static class MiddlewareRegistrationExtensions
 {

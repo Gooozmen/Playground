@@ -17,11 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Extensions\ApplicationRegistrationExtensions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Middleware\Middleware.csproj" />
+    <ProjectReference Include="..\Middleware\Infrastructure.csproj" />
   </ItemGroup>
 
 

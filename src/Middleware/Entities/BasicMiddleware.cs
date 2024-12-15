@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Middleware.Entities;
+namespace Infrastructure.Entities;
 
 public class BasicMiddleware : IMiddleware
 {
