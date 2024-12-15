@@ -2,6 +2,6 @@
 
 namespace Presentation.Controllers.Core;
 
-[ApiController]
+[Controller]
 [Route("api/[controller]")]
 public abstract class CoreController : Controller {}

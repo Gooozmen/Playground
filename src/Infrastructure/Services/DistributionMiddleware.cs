@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Infrastructure.Entities;
+namespace Infrastructure.Services;
 
 public class DistributionMiddleware : IMiddleware
 {

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Infrastructure.Entities;
+using Infrastructure.Services;
 
 namespace Infrastructure.Extensions;
 

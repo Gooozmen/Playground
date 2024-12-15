@@ -3,11 +3,14 @@ using Presentation.Controllers.Core;
 
 namespace Presentation.Controllers;
 
-public class HomeController : CoreController
+[Controller]
+[Route("home")]
+public class HomeController : ControllerBase
 {
+    [HttpGet]
     [Route("Access")]
     public IActionResult Index()
     {
-        return Ok();
+        return BadRequest();
     }
 }

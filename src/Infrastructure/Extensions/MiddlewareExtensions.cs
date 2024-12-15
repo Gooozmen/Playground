@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Infrastructure.Entities;
+using Infrastructure.Services;
 
 namespace Infrastructure.Extensions;
 
