@@ -2,10 +2,12 @@
 
 public class Person
 {
-    private Guid Id { get; set; }
-    private string? FirstName { get; set; }
-    private string? LastName { get; set; }
-    private int? Age { get; set; }
+    public Guid Id { get; set; }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    public int? Age { get; set; }
+
+    public Person() { }
 
     public Person(Guid id, string? firstName, string? lastName, int? age)
     {

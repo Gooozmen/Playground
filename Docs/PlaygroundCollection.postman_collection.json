@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "309dd248-4e94-4ba2-b70b-6083f32b7bf6",
+		"name": "PlaygroundCollection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "22933632"
+	},
+	"item": [
+		{
+			"name": "GettingStarted",
+			"item": [
+				{
+					"name": "Middleware Example",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}?username=JuanGuzman9",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "JuanGuzman9"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ControllerExample",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/Home/Access?username=Juan",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"Home",
+								"Access"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "Juan"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "api",
+			"item": [
+				{
+					"name": "person",
+					"item": [
+						{
+							"name": "GetPerson",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "{{baseUrl}}Person/GetMock"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:5186/api/",
+			"type": "string"
+		}
+	]
+}

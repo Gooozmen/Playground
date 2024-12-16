@@ -1,23 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Presentation.Controllers.Core;
-using Domain.Entities;
+using Common.Mocks;
+using Common.HttpResponses;
 
 
 namespace Presentation.Controllers;
 
 public class PersonController : CoreController
 {
-    [Route("GetPerson")]
+    [Route("GetMock")]
     [HttpGet]
-    public ActionResult<Person> GetPerson()
+    public JsonResult GetPerson()
     {
-        var id = Guid.NewGuid();
-        var firstName = "Juan";
-        var lastName = "Guzman";
-        var age = 19;
+        var personGenerator = new PersonGenerator();
+        var personMock = personGenerator.GenerateRandom();
+        var js = new JsonResult(personMock);
 
-        Person personResult = new Person(id, firstName, lastName, age);
-
-        return Ok(personResult);
+        //return ContentResultFactory.Success(personGenerator);
+        return js;
     }
 }

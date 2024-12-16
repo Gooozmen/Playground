@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Infrastructure.Services;
+using Infrastructure.Middlewares;
 
 namespace Infrastructure.Extensions;
 
@@ -7,9 +7,7 @@ public static class MiddlewareRegistrationExtensions
 {
     public static IServiceCollection RegisterMiddlewareServices(this IServiceCollection services)
     {
-        services.AddTransient<BasicMiddleware>();
-        services.AddTransient<DistributionMiddleware>();
-        services.AddTransient<AccessMiddleware>();
+        //services.AddTransient<ResponseInterceptorMiddleware>();
         return services;
     }
 }

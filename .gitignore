@@ -3,3 +3,4 @@ src/.vs/
 Output/
 src/*/bin/
 src/*/obj/
+Dependencies/
