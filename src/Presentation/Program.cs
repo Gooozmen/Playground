@@ -9,8 +9,9 @@ builder.Services.RegisterMiddlewareServices();//Adding middleware services
 builder.Services.RegisterServices();
 
 var app = builder.Build();
-app.UseRouting();
 
+app.UseStaticFiles();
+app.UseRouting();
 app.ConfigureMiddlewares();// Registered Middlewares - contains the setup of how the middlewares should work
 app.MapControllers(); // Map controllers to endpoints, This is critical to route requests to controllers
 app.Run();

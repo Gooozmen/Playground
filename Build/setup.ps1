@@ -15,7 +15,7 @@ function Verify-PackageSource{
 }
 
 function Install-Toolkit{
-    nuget install Toolkit -Source "github" -OutputDirectory "..\Dependencies"
+    nuget install Toolkit -Source "github" -OutputDirectory "..\Dependencies" -NoCache
 }
 
 function Import-ToolkitSetup{
@@ -23,7 +23,19 @@ function Import-ToolkitSetup{
     . $ToolkitPath
 }
 
+function Remove-Folder([string[]] $FolderArray){
+    foreach($_ in $FolderArray){
+        If(Test-Path("$_")) {Remove-Item $_ -Recurse }
+    }
+}
+
+function Clear-NugetCache{
+    nuget locals all -clear
+}
+
+Clear-NugetCache
 Verify-PackageSource
+Remove-Folder -FolderArray @("..\Dependencies\psake*","..\Dependencies\Toolkit*")
 Install-Toolkit
 Import-ToolkitSetup
 
