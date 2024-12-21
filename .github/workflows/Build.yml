@@ -26,8 +26,6 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Setup
-      shell: pwsh
       run: .\setup.ps1
     - name: Build
-      shell: pwsh
       run: .\Build.ps1
