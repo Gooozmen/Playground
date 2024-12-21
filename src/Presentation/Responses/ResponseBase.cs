@@ -1,4 +1,6 @@
-﻿namespace Common.HttpResponses;
+﻿using Microsoft.AspNetCore.Http;
+
+namespace Presentation.Responses;
 
 public class ResponseBase<T>
 {
