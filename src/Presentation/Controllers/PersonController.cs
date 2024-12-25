@@ -18,8 +18,21 @@ public class PersonController : CoreController
 
     [Route("GetMock")]
     [HttpGet]
-    public ActionResult<ResponseBase<Person>> GetPerson()
+    public IActionResult GetPerson()
     {
+        Response.StatusCode = 200;
+        var personGenerator = new PersonGenerator();
+        var personMock = personGenerator.GenerateRandom();
+        var result = _responseFactory.Success(personMock);
+
+        return Ok(result);
+    }
+
+    [Route("CreatePerson")]
+    [HttpGet]
+    public IActionResult GetPerson()
+    {
+        Response.StatusCode = 200;
         var personGenerator = new PersonGenerator();
         var personMock = personGenerator.GenerateRandom();
         var result = _responseFactory.Success(personMock);

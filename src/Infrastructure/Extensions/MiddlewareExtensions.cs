@@ -8,7 +8,7 @@ public static class MiddlewareExtensions
     public static IApplicationBuilder ConfigureMiddlewares(this IApplicationBuilder app)
     {
         //app.UseMiddleware<ResponseInterceptorMiddleware>();
-
+        app.UseMiddleware<RequestIdMiddleware>();
         return app;
     }
 }

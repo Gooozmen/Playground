@@ -16,4 +16,12 @@ public class ResponseBase<T>
         Message = message;
         Data = data;
     }
+
+    public ResponseBase(int statusCode,T data) 
+    {
+        StatusCode = statusCode;
+        IsSuccess = false;
+        Message = string.Empty;
+        Data = default;
+    }
 }

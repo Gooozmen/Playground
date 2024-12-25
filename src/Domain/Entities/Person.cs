@@ -1,8 +1,14 @@
-﻿namespace Domain.Entities;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace Domain.Entities;
 
 public class Person
 {
+    [Required]
     public Guid Id { get; set; }
+    [DisplayName("Firt Name")]
+    [Length(3,20)]
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public int? Age { get; set; }
