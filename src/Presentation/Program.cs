@@ -5,13 +5,18 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add all required services to the container.
 builder.Services.AddControllers(); // Registers controllers and API endpoints
-builder.Services.RegisterMiddlewareServices();//Adding middleware services
-builder.Services.RegisterServices();
+builder.Services.RegisterMiddlewareServices(); // Adding middleware services
+builder.Services.RegisterServices(); // Register other services
 
 var app = builder.Build();
 
-app.UseStaticFiles();
-app.UseRouting();
-app.ConfigureMiddlewares();// Registered Middlewares - contains the setup of how the middlewares should work
-app.MapControllers(); // Map controllers to endpoints, This is critical to route requests to controllers
+// Configure middleware pipeline
+app.UseStaticFiles(); // Serve static files (should come early to serve files directly)
+app.UseRouting(); // Enable routing for middleware and endpoints
+app.ConfigureMiddlewares(); // Custom middleware configuration (e.g., authentication, logging)
+
+// Map endpoints
+app.MapControllers(); // Map controllers to endpoints
+
+// Start the application
 app.Run();
