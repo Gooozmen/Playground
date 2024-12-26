@@ -1,4 +1,4 @@
-﻿namespace Application.Responses;
+﻿namespace Application.Contracts.Responses;
 
 public class ResponseBase<T>
 {
@@ -15,7 +15,7 @@ public class ResponseBase<T>
         Data = data;
     }
 
-    public ResponseBase(int statusCode,T data) 
+    public ResponseBase(int statusCode, T data)
     {
         StatusCode = statusCode;
         IsSuccess = false;

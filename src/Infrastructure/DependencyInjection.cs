@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Infrastructure.Middlewares;
 using Microsoft.Extensions.DependencyInjection;
+using Infrastructure.HttpClient;
 
 namespace Infrastructure;
 
@@ -15,7 +16,7 @@ public static class DependencyInjection
 
     public static IServiceCollection AddMiddlewareServices(this IServiceCollection services)
     {
-        //services.AddTransient<ResponseInterceptorMiddleware>();
+        services.AddSingleton<IWeatherstackClient, WeatherstackClient>();
         services.AddScoped<RequestIdMiddleware>();
         return services;
     }
