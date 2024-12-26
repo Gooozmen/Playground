@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-
-namespace Presentation.Responses;
+﻿namespace Application.Responses;
 
 public class ResponseBase<T>
 {
