@@ -1,4 +1,4 @@
-﻿using Application.Responses;
+﻿using Application.Contracts.Responses;
 
 namespace Application.Factories;
 

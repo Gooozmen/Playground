@@ -8,6 +8,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Configuration Options
 builder.Services.AddConfigurationOptions(builder.Configuration);
 
+// Register HttpClientFactory
+builder.Services.AddHttpClient();
+
 // Add all required services to the container.
 builder.Services.AddControllers(); // Registers controllers and API endpoints
 builder.Services.AddMiddlewareServices(); // Infrastructure Services Registration

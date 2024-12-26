@@ -11,7 +11,6 @@ public static class DependencyInjection
         //Transients
         services.AddTransient<IResponseFactory, ResponseFactory>();
         services.AddTransient<IWeatherService, WeatherService>();
-
         return services;
     }
 }

@@ -18,16 +18,14 @@ public class WeatherController : CoreController
         _weatherService = weatherService;
     }
 
-    [Route("Current")]
-    [HttpGet]
+    [HttpGet("current")]
     public async Task<IActionResult> GetCurrentWeather([FromQuery] string location)
     {
-        var result = _weatherService.Execute();
-        return result switch
+        var response = _weatherService.GetWeatherForLocation(location);
+        return response.Result.IsSuccess switch
         {
-            // Match specific object values
-            { IsSuccess: false} => Ok(result),
-            { IsSuccess: true} => BadRequest(result)
+            true => Ok(response.Result),
+            false => BadRequest(response.Result)
         };
     }
 }   
