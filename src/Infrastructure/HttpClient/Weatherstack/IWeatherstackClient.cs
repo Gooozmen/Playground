@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.HttpClient;
+﻿namespace Infrastructure.ApplicationHttpClient;
 
 public interface IWeatherstackClient
 {

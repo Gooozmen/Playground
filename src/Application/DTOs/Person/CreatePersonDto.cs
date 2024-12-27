@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Common.DTOs.Person;
+namespace Application.DTOs.Person;
 
-public class CreatePerson
+public class CreatePersonDto
 { 
     [Required]
     public Guid Id { get; set; }
@@ -12,9 +12,9 @@ public class CreatePerson
     public string? LastName { get; set; }
     public int? Age { get; set; }
 
-    public CreatePerson() { }
+    public CreatePersonDto() { }
 
-    public CreatePerson(Guid id, string? firstName, string? lastName, int? age)
+    public CreatePersonDto(Guid id, string? firstName, string? lastName, int? age)
     {
         Id = id;
         FirstName = firstName;

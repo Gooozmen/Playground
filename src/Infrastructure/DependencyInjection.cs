@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Infrastructure.Middlewares;
 using Microsoft.Extensions.DependencyInjection;
-using Infrastructure.HttpClient;
+using Infrastructure.ApplicationHttpClient;
 
 namespace Infrastructure;
 

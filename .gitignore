@@ -3,6 +3,8 @@ src/.vs/
 Output/
 src/*/bin/
 src/*/obj/
+Tests/*/bin/
+Tests/*/obj/
 Dependencies/*
 # Exclude (keep) a specific file
 Dependencies/.gitkeep
