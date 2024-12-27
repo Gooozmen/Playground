@@ -1,26 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Presentation.Controllers.Core;
-using Common.Mocks;
 using Application.Factories;
-using Domain.Entities;
+using Application.Helpers;
 
 namespace Presentation.Controllers;
 
 public class PersonController : CoreController
 {
     private readonly IResponseFactory _responseFactory;
-    public PersonController(IResponseFactory responseFactory)
+    private readonly IPersonGeneratorHelper _personGeneratorHelper;
+
+    public PersonController(IResponseFactory responseFactory, 
+                            IPersonGeneratorHelper personGeneratorHelper)
     {
         _responseFactory = responseFactory;
+        _personGeneratorHelper = personGeneratorHelper;
     }
 
     [Route("GetMock")]
     [HttpGet]
     public IActionResult GetPerson()
     {
-        Response.StatusCode = 200;
-        var personGenerator = new PersonGenerator();
-        var personMock = personGenerator.GenerateRandom();
+        var personMock = _personGeneratorHelper.GenerateRandom();
         var result = _responseFactory.Success(personMock);
 
         return Ok(result);

@@ -1,6 +1,6 @@
 ﻿using System.Net.Http.Json;
 
-namespace Infrastructure.HttpClient;
+namespace Infrastructure.ApplicationHttpClient;
 
 public abstract class HttpClientService
 {

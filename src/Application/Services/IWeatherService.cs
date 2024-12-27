@@ -1,6 +1,6 @@
 ﻿using Domain.Options;
 using Application.Contracts.Responses;
-using Infrastructure.HttpClient;
+using Infrastructure.ApplicationHttpClient;
 
 namespace Application.Services;
 

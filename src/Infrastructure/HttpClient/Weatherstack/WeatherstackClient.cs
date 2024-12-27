@@ -1,16 +1,21 @@
 ﻿using Microsoft.Extensions.Options;
 using Domain.Options;
-namespace Infrastructure.HttpClient;
+namespace Infrastructure.ApplicationHttpClient;
 public class WeatherstackClient : HttpClientService, IWeatherstackClient
 {
     private const string HttpClientName = "Weatherstack";
-    private readonly Weatherstack _weatherstack;
+    private readonly WeatherstackApi _weatherstack;
+
+    public WeatherstackClient()
+        : this(new DefaultHttpClientFactory(), Options.Create(new WeatherstackApi()))
+    {
+    }
 
     public WeatherstackClient(IHttpClientFactory httpClientFactory,
-                              IOptions<Weatherstack> options)
+                              IOptions<WeatherstackApi> options)
                               : base(httpClientFactory)
     {
-        _weatherstack = options.Value;
+        _weatherstack = options.Value ?? throw new ArgumentNullException(nameof(options));
     }
 
     public async Task<WeatherstackResponse> GetWeatherAsync(string location)
@@ -21,4 +26,9 @@ public class WeatherstackClient : HttpClientService, IWeatherstackClient
         return await GetAsync<WeatherstackResponse>(endpoint, HttpClientName);
     }
     
+}
+
+public class DefaultHttpClientFactory : IHttpClientFactory
+{
+    public HttpClient CreateClient(string name) => new HttpClient();
 }

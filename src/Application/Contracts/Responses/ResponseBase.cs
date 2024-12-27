@@ -22,4 +22,9 @@ public class ResponseBase<T>
         Message = string.Empty;
         Data = default;
     }
+
+    public ResponseBase()
+    {
+    }
+
 }

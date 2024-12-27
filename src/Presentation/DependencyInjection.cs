@@ -8,7 +8,7 @@ public static class DependencyInjection
     public static IServiceCollection AddConfigurationOptions(this IServiceCollection services, IConfiguration configuration)
     {
         // Add configuration options
-        services.Configure<Weatherstack>(configuration.GetSection("Weatherstack"));
+        services.Configure<WeatherstackApi>(configuration.GetSection("Weatherstack"));
 
         return services;
     }
