@@ -1,7 +1,4 @@
-﻿using System;
-using Xunit;
-using Application.Helpers;
-using Moq;
+﻿using Shared.Helpers;
 
 namespace Tests.Application.Helpers;
 

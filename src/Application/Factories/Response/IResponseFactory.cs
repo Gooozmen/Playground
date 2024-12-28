@@ -14,5 +14,5 @@ public interface IResponseFactory
     /// <returns>ResponseBase object that contains response entity and http request information with http information</returns>
     ResponseBase<T> HandleResponse<T>(T data, int statusCode);
     ResponseBase<T> HandleResponse<T>(T data, int statusCode, string message);
-
+    ResponseBase<T> HandleResponse<T>(ResponseBase<T> response);
 }

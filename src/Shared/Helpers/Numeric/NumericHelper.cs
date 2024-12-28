@@ -1,4 +1,4 @@
-﻿namespace Application.Helpers;
+﻿namespace Shared.Helpers;
 
 public class NumericHelper : INumericHelper
 {

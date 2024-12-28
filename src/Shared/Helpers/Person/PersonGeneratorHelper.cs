@@ -1,7 +1,7 @@
 ﻿using Shared.DTOs;
 using RandomNameGeneratorLibrary;
 
-namespace Application.Helpers;
+namespace Shared.Helpers;
 
 public class PersonGeneratorHelper : IPersonGeneratorHelper
 {

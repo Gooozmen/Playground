@@ -6,4 +6,15 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+    <PropertyGroup>
+    <OutputPath>..\..\Output\</OutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <RestorePackagesPath>..\..\Dependencies\Packages\</RestorePackagesPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="RandomNameGeneratorLibrary" Version="1.2.2" />
+  </ItemGroup>
+
 </Project>

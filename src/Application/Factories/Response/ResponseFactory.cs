@@ -17,5 +17,9 @@ public class ResponseFactory : IResponseFactory
     {
         return new ResponseBase<T>(statusCode, data);
     }
+    public ResponseBase<T> HandleResponse<T>(ResponseBase<T> response)
+    {
+        return response;
+    }
 
 }

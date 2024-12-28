@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Presentation.Controllers.Core;
 using Application.Factories;
-using Application.Helpers;
+using Shared.Helpers;
 using Shared.Enums;
 
 namespace Presentation.Controllers;
