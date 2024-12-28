@@ -1,6 +1,5 @@
-﻿using Domain.Options;
-using Application.Contracts.Responses;
-using Infrastructure.ApplicationHttpClient;
+﻿using Shared.Contracts.Responses;
+using Shared.DTOs;
 
 namespace Application.Services;
 

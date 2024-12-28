@@ -1,4 +1,6 @@
-﻿namespace Infrastructure.ApplicationHttpClient;
+﻿using Shared.DTOs;
+
+namespace Infrastructure.ApplicationHttpClient;
 
 public interface IWeatherstackClient
 {

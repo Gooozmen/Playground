@@ -1,9 +1,10 @@
 ﻿using System.Net;
-using Domain.Options;
+using Shared.Options;
 using Infrastructure.ApplicationHttpClient;
 using Microsoft.Extensions.Options;
 using Moq;
 using Moq.Protected;
+using Shared.DTOs;
 
 namespace Tests.Infrastructure.ApplicationHttpClient;
 public class WeatherstackClientTests

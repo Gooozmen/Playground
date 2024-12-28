@@ -1,7 +1,9 @@
-﻿using Application.Contracts.Responses;
+﻿using Shared.Contracts.Responses;
+using Shared.DTOs;
 using Application.Factories;
 using Infrastructure.ApplicationHttpClient;
-
+using System.Net;
+using Shared.Enums;
 namespace Application.Services;
 
 public class WeatherService : IWeatherService
@@ -23,8 +25,8 @@ public class WeatherService : IWeatherService
 
     public async Task<ResponseBase<WeatherstackResponse>> GetWeatherForLocation(string location)
     {
-        var request = await _weatherstackClient.GetWeatherAsync(location);
-        var result = _responseFactory.Success(request);
+        var response = await _weatherstackClient.GetWeatherAsync(location);
+        var result = _responseFactory.HandleResponse(response,(int)HttpStatus.OK);
         return result;
     }
 }

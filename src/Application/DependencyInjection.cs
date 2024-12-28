@@ -3,6 +3,7 @@ using Application.Factories;
 using Application.Services;
 using RandomNameGeneratorLibrary;
 using Application.Helpers;
+using Application.Mappings;
 
 namespace Application;
 
@@ -13,14 +14,17 @@ public static class DependencyInjection
         //Factories
         services.AddTransient<IResponseFactory, ResponseFactory>();
 
-        //services
+        //Services
         services.AddTransient<IWeatherService, WeatherService>();
-
-        services.AddSingleton<IPersonNameGenerator, PersonNameGenerator>();
+        services.AddSingleton<IPersonNameGenerator, PersonNameGenerator>(); //External
 
         //Helpers
         services.AddSingleton<INumericHelper, NumericHelper>();
         services.AddSingleton<IPersonGeneratorHelper, PersonGeneratorHelper>();
+
+        //AutoMapper
+        services.AddAutoMapper(typeof(MappingProfile));
+
 
         return services;
     }
