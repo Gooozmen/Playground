@@ -9,13 +9,6 @@ public class WeatherstackResponse
     public WeatherstackCurrent Current { get; set; }
 }
 
-public class WeatherstackError
-{
-    public int Code { get; set; }
-    public string Type { get; set; }
-    public string Info { get; set; }
-}
-
 public class WeatherstackRequest
 {
     [JsonPropertyName("type")]
@@ -85,3 +78,22 @@ public class WeatherstackCurrent
     [JsonPropertyName("is_day")]
     public string IsDay { get; set; } 
 }
+
+public class WeatherstackError
+{
+    [JsonPropertyName("success")]
+    public bool Success { get; set; }
+    [JsonPropertyName("error")]
+    public WeatherError Error { get; set; }
+}
+
+public class WeatherError
+{
+    [JsonPropertyName("code")]
+    public int Code { get; set; }
+    [JsonPropertyName("type")]
+    public string Type { get; set; }
+    [JsonPropertyName("info")]
+    public string Info { get; set; }
+}
+

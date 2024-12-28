@@ -1,8 +1,8 @@
-﻿using Shared.DTOs;
+﻿using System.Text.Json.Nodes;
 
 namespace Infrastructure.ApplicationHttpClient;
 
 public interface IWeatherstackClient
 {
-    Task<WeatherstackResponse> GetWeatherAsync(string location);
+    Task<JsonObject> GetWeatherAsync(string location);
 }

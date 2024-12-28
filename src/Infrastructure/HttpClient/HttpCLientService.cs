@@ -11,13 +11,12 @@ public abstract class HttpClientService
         _httpClientFactory = httpClientFactory;
     }
 
-    protected async Task<T> GetAsync<T>(string urlEndpoint, string httpClientName)
+    protected async Task<T> GetAsync<T>(string baseUrl, string urlEndpoint, string httpClientName)
     {
 
         var client = _httpClientFactory.CreateClient(httpClientName);
-        //client.BaseAddress = new Uri(baseAddress);
 
-        var uriBase = $"{client.BaseAddress}{urlEndpoint}";
+        var uriBase = $"{baseUrl}{urlEndpoint}";
 
         var response = await client.GetAsync(uriBase);
 
@@ -27,7 +26,6 @@ public abstract class HttpClientService
             return (T)Activator.CreateInstance(typeof(T));
 
         var dataResponse = await response.Content.ReadFromJsonAsync<T>();
-
 
         return dataResponse!;
     }

@@ -1,6 +1,6 @@
 ﻿using Shared.DTOs;
 
-namespace Application.Helpers;
+namespace Shared.Helpers;
 
 public interface IPersonGeneratorHelper
 {
