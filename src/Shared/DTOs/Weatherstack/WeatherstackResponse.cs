@@ -1,5 +1,6 @@
 ﻿using System.Text.Json.Serialization;
-namespace Infrastructure.ApplicationHttpClient;
+
+namespace Shared.DTOs;
 
 public class WeatherstackResponse
 {
@@ -8,44 +9,51 @@ public class WeatherstackResponse
     public WeatherstackCurrent Current { get; set; }
 }
 
+public class WeatherstackError
+{
+    public int Code { get; set; }
+    public string Type { get; set; }
+    public string Info { get; set; }
+}
+
 public class WeatherstackRequest
 {
     [JsonPropertyName("type")]
-    public string Type { get; set; }
+    public string Type { get; set; } 
     [JsonPropertyName("query")]
-    public string Query { get; set; }
+    public string Query { get; set; } 
     [JsonPropertyName("language")]
-    public string Language { get; set; }
+    public string Language { get; set; } 
     [JsonPropertyName("unit")]
-    public string Unit { get; set; }
+    public string Unit { get; set; } 
 }
 
 public class WeatherstackLocation
 {
     [JsonPropertyName("name")]
-    public string Name { get; set; }
+    public string Name { get; set; } 
     [JsonPropertyName("country")]
     public string Country { get; set; }
     [JsonPropertyName("region")]
     public string Region { get; set; }
     [JsonPropertyName("lat")]
-    public string Lat { get; set; }
+    public string Lat { get; set; } 
     [JsonPropertyName("lon")]
-    public string Lon { get; set; }
+    public string Lon { get; set; } 
     [JsonPropertyName("timezone_id")]
-    public string TimezoneId { get; set; }
+    public string TimezoneId { get; set; } 
     [JsonPropertyName("localtime")]
-    public string Localtime { get; set; }
+    public string Localtime { get; set; } 
     [JsonPropertyName("localtime_epoch")]
     public long LocaltimeEpoch { get; set; }
     [JsonPropertyName("utc_offset")]
-    public string UtcOffset { get; set; }
+    public string UtcOffset { get; set; } 
 }
 
 public class WeatherstackCurrent
 {
     [JsonPropertyName("observation_time")]
-    public string ObservationTime { get; set; }
+    public string ObservationTime { get; set; } 
     [JsonPropertyName("temperature")]
     public int Temperature { get; set; }
     [JsonPropertyName("weather_code")]
@@ -55,11 +63,11 @@ public class WeatherstackCurrent
     [JsonPropertyName("weather_descriptions")]
     public List<string> WeatherDescriptions { get; set; }
     [JsonPropertyName("wind_speed")]
-    public int WindSpeed { get; set; }
+    public int WindSpeed { get; set; } = 0;
     [JsonPropertyName("wind_degree")]
     public int WindDegree { get; set; }
     [JsonPropertyName("wind_dir")]
-    public string WindDir { get; set; }
+    public string WindDir { get; set; } 
     [JsonPropertyName("pressure")]
     public int Pressure { get; set; }
     [JsonPropertyName("precip")]
@@ -75,5 +83,5 @@ public class WeatherstackCurrent
     [JsonPropertyName("visibility")]
     public int Visibility { get; set; }
     [JsonPropertyName("is_day")]
-    public string IsDay { get; set; }
+    public string IsDay { get; set; } 
 }

@@ -1,14 +1,18 @@
 ﻿using Application.Factories;
+using Shared.Enums;
+using Xunit.Abstractions;
 
 namespace Tests.Application.Factories;
 
 public class ResponseFactoryTests
 {
+    private readonly ITestOutputHelper _outputHelper;
     private readonly ResponseFactory _responseFactory;
 
-    public ResponseFactoryTests()
+    public ResponseFactoryTests(ITestOutputHelper testOutputHelper)
     {
         _responseFactory = new ResponseFactory();
+        _outputHelper = testOutputHelper;
     }
 
     [Fact]
@@ -17,10 +21,10 @@ public class ResponseFactoryTests
         // Arrange
         var data = "Test Data";
         var expectedStatusCode = 200;
-        var expectedMessage = "Operation successful";
+        var expectedMessage = "OK";
 
         // Act
-        var result = _responseFactory.Success(data);
+        var result = _responseFactory.HandleResponse(data,(int)HttpStatus.OK);
 
         // Assert
         Assert.NotNull(result);
@@ -36,10 +40,10 @@ public class ResponseFactoryTests
         // Arrange
         var data = "Custom Data";
         var customStatusCode = 201;
-        var customMessage = "Custom success message";
+        var customMessage = "Created";
 
         // Act
-        var result = _responseFactory.Success(data, customStatusCode, customMessage);
+        var result = _responseFactory.HandleResponse(data, (int)HttpStatus.Created);
 
         // Assert
         Assert.NotNull(result);
@@ -55,10 +59,10 @@ public class ResponseFactoryTests
         // Arrange
         var data = "Error Data";
         var expectedStatusCode = 400;
-        var expectedMessage = "Error occurred";
+        var expectedMessage = "Bad Request";
 
         // Act
-        var result = _responseFactory.Error(expectedMessage, data);
+        var result = _responseFactory.HandleResponse(data,(int)HttpStatus.BadRequest);
 
         // Assert
         Assert.NotNull(result);
@@ -77,7 +81,7 @@ public class ResponseFactoryTests
         var customMessage = "Internal Server Error";
 
         // Act
-        var result = _responseFactory.Error(customMessage, data, customStatusCode);
+        var result = _responseFactory.HandleResponse(data, (int)HttpStatus.InternalServerError);
 
         // Assert
         Assert.NotNull(result);

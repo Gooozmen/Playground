@@ -15,10 +15,9 @@ public abstract class HttpClientService
     {
 
         var client = _httpClientFactory.CreateClient(httpClientName);
-
+        //client.BaseAddress = new Uri(baseAddress);
 
         var uriBase = $"{client.BaseAddress}{urlEndpoint}";
-
 
         var response = await client.GetAsync(uriBase);
 
@@ -28,6 +27,7 @@ public abstract class HttpClientService
             return (T)Activator.CreateInstance(typeof(T));
 
         var dataResponse = await response.Content.ReadFromJsonAsync<T>();
+
 
         return dataResponse!;
     }

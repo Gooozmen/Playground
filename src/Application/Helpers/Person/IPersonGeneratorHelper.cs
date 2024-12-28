@@ -1,8 +1,8 @@
-﻿using Application.DTOs.Person;
+﻿using Shared.DTOs;
 
 namespace Application.Helpers;
 
 public interface IPersonGeneratorHelper
 {
-    PersonDto GenerateRandom();
+    PersonResponse GenerateRandom();
 }

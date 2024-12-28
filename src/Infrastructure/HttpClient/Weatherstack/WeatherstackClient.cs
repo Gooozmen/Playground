@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Options;
-using Domain.Options;
+using Shared.Options;
+using Shared.DTOs;
 namespace Infrastructure.ApplicationHttpClient;
 public class WeatherstackClient : HttpClientService, IWeatherstackClient
 {
@@ -23,7 +24,12 @@ public class WeatherstackClient : HttpClientService, IWeatherstackClient
         // Example endpoint for Weatherstack API
         string endpoint = $"{_weatherstack.BaseUrl}/current?access_key={_weatherstack.Key}&query={location}";
 
-        return await GetAsync<WeatherstackResponse>(endpoint, HttpClientName);
+        var response = await GetAsync<WeatherstackResponse>(endpoint, HttpClientName);
+
+        if (response == null) 
+            throw new Exception("Weatherstack request has failed");
+
+        return response;
     }
     
 }

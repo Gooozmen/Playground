@@ -1,10 +1,10 @@
-﻿namespace Domain.Options;
+﻿namespace Shared.Options;
 
 //options design pattern
 public class WeatherstackApi
 {
-    public string BaseUrl { get; set; }
-    public string Key { get; set; }
+    public string BaseUrl { get; set; } = string.Empty;
+    public string Key { get; set; } = string.Empty;
     public WeatherstackApi(string baseUrl, string key)
     {
         BaseUrl = baseUrl;

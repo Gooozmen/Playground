@@ -1,4 +1,5 @@
-﻿using Application.Contracts.Responses;
+﻿using Shared.Contracts.Responses;
+using Shared.Enums;
 
 namespace Application.Factories;
 
@@ -8,18 +9,13 @@ namespace Application.Factories;
 /// <typeparam name="T">The type of the response data.</typeparam>
 public class ResponseFactory : IResponseFactory
 {
-    /// <summary>
-    /// Creates a success response with the provided data.
-    /// </summary>
-    public ResponseBase<T> Success<T>(T data, int statusCode = 200, string message = "Operation successful")
+    public ResponseBase<T> HandleResponse<T>(T data, int statusCode, string message)
     {
-        return new ResponseBase<T>(statusCode, true, message, data);
+        return new ResponseBase<T>(statusCode, data, message);
     }
-    /// <summary>
-    /// Creates an error response with a message and optional status code.
-    /// </summary>
-    public ResponseBase<T> Error<T>(string message, T data, int statusCode = 400)
+    public ResponseBase<T> HandleResponse<T>(T data, int statusCode)
     {
-        return new ResponseBase<T>(statusCode, false, message, data);
+        return new ResponseBase<T>(statusCode, data);
     }
+
 }

@@ -1,4 +1,4 @@
-﻿using Application.DTOs.Person;
+﻿using Shared.DTOs;
 using RandomNameGeneratorLibrary;
 
 namespace Application.Helpers;
@@ -20,9 +20,9 @@ public class PersonGeneratorHelper : IPersonGeneratorHelper
         _numericHelper = numericHelper;
     }
 
-    public PersonDto GenerateRandom()
+    public PersonResponse GenerateRandom()
     {
-        var person = new PersonDto
+        var person = new PersonResponse
         {
             Id = Guid.NewGuid(),
             FirstName = _personNameGenerator.GenerateRandomFirstName(),
