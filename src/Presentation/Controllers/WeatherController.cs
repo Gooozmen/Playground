@@ -30,22 +30,16 @@ public class WeatherController : CoreController
         var response =  await _weatherService.GetWeatherForLocation(location);
         var success = _weatherService.ValidateJsonResponse(response);
 
-        if (success)
-        {
-            var data = _jsonHelper.ConvertJsonObjectToEntity<WeatherstackResponse>(response);
-            var statusCode = (int)HttpStatus.OK;
-            var statusDescription = HttpStatusDescriptions.GetDescription(statusCode);
-            var result = _responseFactory.HandleResponse(response, statusCode, statusDescription);
-            return Ok(result);
-        }
-        else
-        {
-            var data = _jsonHelper.ConvertJsonObjectToEntity<WeatherstackError>(response);
-            var statusCode = (int)HttpStatus.BadRequest;
-            var statusDescription = HttpStatusDescriptions.GetDescription(statusCode);
-            var result = _responseFactory.HandleResponse(data, statusCode, statusDescription);
-            return Ok(result);
-        }
+        object data;
 
+        if (success)
+            data = _jsonHelper.ConvertJsonObjectToEntity<WeatherstackResponse>(response);
+        else
+            data = _jsonHelper.ConvertJsonObjectToEntity<WeatherstackError>(response);
+
+        var statusCode = success ? (int)HttpStatus.OK : (int)HttpStatus.BadRequest;
+        var statusDescription = HttpStatusDescriptions.GetDescription(statusCode);
+        var result = _responseFactory.HandleResponse(data, statusCode, statusDescription);
+        return Ok(result);
     }
 }   
