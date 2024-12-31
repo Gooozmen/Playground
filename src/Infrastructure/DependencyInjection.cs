@@ -25,13 +25,13 @@ public static class DependencyInjection
 
         // Seeders
         services.AddTransient<ISeederService,PersonSeederService>();
-        services.AddSingleton<IDatabaseSeeder,DatabaseSeeder>();
+        //services.AddSingleton<IDatabaseSeeder,DatabaseSeeder>();
 
         // Add DbContext with configuration for the connection string
         services.AddDbContext<PlaygroundDbContext>(options =>
         {
-
-            options.UseSqlServer(configuration.GetConnectionString("PlaygroundDB"));
+            var connectionString = configuration.GetConnectionString("PlaygroundDb");
+            options.UseSqlServer(connectionString);
         });
 
         return services;

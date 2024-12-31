@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
 using Shared.Options;
-using Shared.DTOs;
 using System.Text.Json.Nodes;
 using Shared.Helpers;
 namespace Infrastructure.ApplicationHttpClient;

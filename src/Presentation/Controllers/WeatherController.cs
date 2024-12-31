@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Presentation.Controllers.Core;
 using Application.Factories;
 using Application.Services;
 using Shared.Enums;
@@ -40,6 +39,10 @@ public class WeatherController : CoreController
         var statusCode = success ? (int)HttpStatus.OK : (int)HttpStatus.BadRequest;
         var statusDescription = HttpStatusDescriptions.GetDescription(statusCode);
         var result = _responseFactory.HandleResponse(data, statusCode, statusDescription);
-        return Ok(result);
+
+        if(data.GetType() == typeof(WeatherstackResponse))
+            return Ok(result);
+        else 
+            return BadRequest(result);
     }
 }   
