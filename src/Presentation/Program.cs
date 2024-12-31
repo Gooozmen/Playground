@@ -33,14 +33,5 @@ app.UseStaticFiles(); // Serve static files (should come early to serve files di
 app.UseRouting(); // Enable routing for middleware and endpoints
 app.MapControllers(); // Map controllers to endpoints
 
-using (var scope = app.Services.CreateScope())
-{
-    var dbContext = scope.ServiceProvider.GetRequiredService<PlaygroundDbContext>();
-    await dbContext.Database.MigrateAsync();
-    var seeder = scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
-    await seeder.SeedAsync(dbContext);
-}
-
-
 // Start the application
 app.Run();
