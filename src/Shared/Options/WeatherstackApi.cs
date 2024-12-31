@@ -1,6 +1,5 @@
 ﻿namespace Shared.Options;
 
-//options design pattern
 public class WeatherstackApi
 {
     public string BaseUrl { get; set; } = string.Empty;
