@@ -6,13 +6,11 @@ namespace Tests.Application.Factories;
 
 public class ResponseFactoryTests
 {
-    private readonly ITestOutputHelper _outputHelper;
     private readonly ResponseFactory _responseFactory;
 
-    public ResponseFactoryTests(ITestOutputHelper testOutputHelper)
+    public ResponseFactoryTests()
     {
         _responseFactory = new ResponseFactory();
-        _outputHelper = testOutputHelper;
     }
 
     [Fact]
@@ -40,10 +38,10 @@ public class ResponseFactoryTests
         // Arrange
         var data = "Custom Data";
         var customStatusCode = 201;
-        var customMessage = "Created";
+        var customMessage = "Custom message";
 
         // Act
-        var result = _responseFactory.HandleResponse(data, (int)HttpStatus.Created);
+        var result = _responseFactory.HandleResponse(data, (int)HttpStatus.Created,"Custom message");
 
         // Assert
         Assert.NotNull(result);
@@ -77,11 +75,11 @@ public class ResponseFactoryTests
     {
         // Arrange
         var data = "Custom Error Data";
-        var customStatusCode = 500;
-        var customMessage = "Internal Server Error";
+        var customStatusCode = 503;
+        var customMessage = "Custom Internal Server Error";
 
         // Act
-        var result = _responseFactory.HandleResponse(data, (int)HttpStatus.InternalServerError);
+        var result = _responseFactory.HandleResponse(data, 503, "Custom Internal Server Error");
 
         // Assert
         Assert.NotNull(result);

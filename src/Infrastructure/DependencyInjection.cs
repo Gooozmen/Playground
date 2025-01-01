@@ -11,30 +11,42 @@ namespace Infrastructure;
 
 public static class DependencyInjection
 {
-    public static IApplicationBuilder UseInfrastructureMiddlewares(this IApplicationBuilder app)
+    public static IApplicationBuilder UseInfrastructure(this IApplicationBuilder app)
     {
         //app.UseMiddleware<ResponseInterceptorMiddleware>();
         //app.UseMiddleware<RequestIdMiddleware>();
         return app;
     }
 
-    public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddDbContext<PlaygroundDbContext>(options =>
+        {
+            options.UseSqlServer
+            (
+                configuration.GetConnectionString("PlaygroundDb"),
+                builder =>
+                {
+                    builder.MigrationsAssembly(typeof(PlaygroundDbContext).Assembly.FullName);
+                    builder.CommandTimeout(15);
+                }
+            );
+            options.EnableDetailedErrors(detailedErrorsEnabled: true);
+            options.EnableSensitiveDataLogging();
+        });
+
+        services.AddScoped<IDbContextFactory<PlaygroundDbContext>, PlaygroundDbContextFactory<PlaygroundDbContext>>();
+        services.AddTransient<IPlaygroundDbContext>(provider => provider.GetRequiredService<IDbContextFactory<PlaygroundDbContext>>().CreateDbContext());
+        services.AddScoped<PlaygroundDbContextInitializer>();
+
         // Register your services
         services.AddSingleton<IWeatherstackClient, WeatherstackClient>();
 
         // Seeders
-        services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
-        services.AddScoped<ISeederService,PersonSeederService>();
+        services.AddScoped<IContextInitializer, PlaygroundDbContextInitializer>();
+        services.AddScoped<ISeederService, PersonSeederService>();
         services.AddScoped<ISeederService, UserRoleSeederService>();
         services.AddScoped<ISeederService, UserSeederService>();
-
-        // Add DbContext with configuration for the connection string
-        services.AddDbContext<PlaygroundDbContext>(options =>
-        {
-            var connectionString = configuration.GetConnectionString("PlaygroundDb");
-            options.UseSqlServer(connectionString);
-        });
 
         return services;
     }
