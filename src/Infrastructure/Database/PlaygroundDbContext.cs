@@ -8,6 +8,8 @@ namespace Infrastructure.Database;
 public class PlaygroundDbContext : DbContext
 {
     public virtual DbSet<Person> Persons { get; set; }
+    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<UserRole> UserRoles { get; set; } 
 
     public PlaygroundDbContext(DbContextOptions<PlaygroundDbContext> options) : base(options)
     {}
@@ -16,10 +18,5 @@ public class PlaygroundDbContext : DbContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(PlaygroundDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
-    }
-    public async Task<string> GetServerCurrentTimeAsync()
-    {
-        var result = await Database.ExecuteSqlRawAsync("SELECT GETDATE()");
-        return result.ToString();
     }
 }

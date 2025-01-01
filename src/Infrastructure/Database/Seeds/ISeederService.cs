@@ -1,7 +1,4 @@
-﻿using Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-
-namespace Infrastructure.Database.Seeds;
+﻿namespace Infrastructure.Database.Seeds;
 
 public interface ISeederService
 {

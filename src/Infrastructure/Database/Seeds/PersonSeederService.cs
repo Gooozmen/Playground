@@ -5,8 +5,6 @@ namespace Infrastructure.Database.Seeds;
 
 public class PersonSeederService : ISeederService
 {
-    public const string TableName = "Person";
-
     private readonly PlaygroundDbContext _context;
 
     public PersonSeederService(PlaygroundDbContext context)
@@ -20,12 +18,12 @@ public class PersonSeederService : ISeederService
         {
             var people = new List<Person>
             {
-                new Person { Id = Guid.NewGuid(), FirstName = "John", LastName = "Doe", Age = 30 },
-                new Person { Id = Guid.NewGuid(), FirstName = "Jane", LastName = "Smith", Age = 25 }
+                new Person { FirstName = "John", LastName = "Doe", Age = 30 },
+                new Person { FirstName = "Jane", LastName = "Smith", Age = 25 }
             };
 
             await _context.Persons.AddRangeAsync(people);
-            await _context.SaveChangesAsync();
         }
     }
 }
+

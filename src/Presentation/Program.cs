@@ -3,8 +3,6 @@ using Application;
 using Presentation.Environments;
 using Presentation;
 using Infrastructure.Database.Seeds;
-using Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,14 +22,19 @@ var app = builder.Build();
 
 var environmentValidation = app.Services.GetRequiredService<IEnvironmentValidator>().IsDevelopment();
 
-if (environmentValidation) 
-    app.UseDeveloperExceptionPage();
-
 // Configure middleware pipeline
 app.UseInfrastructureMiddlewares(); // Custom middleware configuration (e.g., authentication, logging)
 app.UseStaticFiles(); // Serve static files (should come early to serve files directly)
 app.UseRouting(); // Enable routing for middleware and endpoints
 app.MapControllers(); // Map controllers to endpoints
+
+if (environmentValidation)
+{
+    app.UseDeveloperExceptionPage();
+
+    using (var scope = app.Services.CreateScope())
+        await scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>().SeedAllAsync();
+}
 
 // Start the application
 app.Run();

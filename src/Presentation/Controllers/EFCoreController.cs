@@ -17,6 +17,6 @@ public class EFCoreController : CoreController
     [HttpGet]
     public IActionResult Get()
     {
-
+       return Ok();
     }
 }

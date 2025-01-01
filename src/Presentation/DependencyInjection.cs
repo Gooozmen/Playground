@@ -9,6 +9,7 @@ public static class DependencyInjection
     {
         // Add configuration options
         services.Configure<WeatherstackApi>(configuration.GetSection("Weatherstack"));
+        services.Configure<ConnectionStrings>(configuration.GetSection("ConnectionStrings"));
 
         return services;
     }
