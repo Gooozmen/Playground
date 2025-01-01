@@ -1,20 +1,22 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using Shared.Options;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Database;
-
-public class PlaygroundDbContextFactory : IDesignTimeDbContextFactory<PlaygroundDbContext>
+public class PlaygroundDbContextFactory<TContext> : IDbContextFactory<TContext> where TContext : DbContext
 {
+    private readonly IServiceProvider _provider;
 
-    public PlaygroundDbContext CreateDbContext(string[] args)
+    public PlaygroundDbContextFactory(IServiceProvider provider)
     {
-        var optionsBuilder = new DbContextOptionsBuilder<PlaygroundDbContext>();
-        optionsBuilder.UseSqlServer("Server=tcp:playgrounddatabase.cx86qgkw280r.us-east-1.rds.amazonaws.com,1433;Database=PlaygroundDb;User Id=admin;Password=Guzm44n27141903;TrustServerCertificate=True;");
+        _provider = provider;
+    }
 
-        return new PlaygroundDbContext(optionsBuilder.Options);
+    public TContext CreateDbContext()
+    {
+        if (_provider == null)
+            throw new InvalidOperationException("You must configure an instance of IServiceProvider");
+
+        return ActivatorUtilities.CreateInstance<TContext>(_provider);
     }
 }
 

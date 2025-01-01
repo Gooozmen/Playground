@@ -1,14 +1,30 @@
-﻿namespace Infrastructure.Database.Seeds;
+﻿using Infrastructure.Database.Seeds;
+using Microsoft.EntityFrameworkCore;
 
-public class DatabaseSeeder : IDatabaseSeeder
+namespace Infrastructure.Database;
+
+public class PlaygroundDbContextInitializer : IContextInitializer
 {
     private readonly IEnumerable<ISeederService> _seeders;
     private readonly PlaygroundDbContext _context;
 
-    public DatabaseSeeder(IEnumerable<ISeederService> seeders,PlaygroundDbContext context)
+    public PlaygroundDbContextInitializer(IEnumerable<ISeederService> seeders,PlaygroundDbContext context)
     {
         _seeders = seeders;
         _context = context;
+    }
+
+    public async Task InitialiseAsync()
+    {
+        try
+        {
+            if (_context.Database.IsSqlServer())
+                await _context.Database.MigrateAsync();
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
     }
 
     public async Task SeedAllAsync()
@@ -24,7 +40,8 @@ public class DatabaseSeeder : IDatabaseSeeder
     }
 }
 
-public interface IDatabaseSeeder
+public interface IContextInitializer
 {
+    Task InitialiseAsync();
     Task SeedAllAsync();
 }

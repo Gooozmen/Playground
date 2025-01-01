@@ -9,12 +9,13 @@ namespace Application;
 
 public static class DependencyInjection
 {
-    public static IServiceCollection AddApplicationServices(this IServiceCollection services)
+    public static IServiceCollection AddApplication(this IServiceCollection services)
     {
         //Factories
         services.AddTransient<IResponseFactory, ResponseFactory>();
 
         //Services
+        services.AddTransient<IUserService, UserService>();
         services.AddTransient<IWeatherService, WeatherService>();
         services.AddSingleton<IPersonNameGenerator, PersonNameGenerator>(); //External
 

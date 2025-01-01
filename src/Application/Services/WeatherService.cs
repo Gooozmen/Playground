@@ -1,13 +1,6 @@
-﻿using Shared.Contracts.Responses;
-using Shared.DTOs;
-using Application.Factories;
+﻿using Application.Factories;
 using Infrastructure.ApplicationHttpClient;
-using System.Net;
-using Shared.Enums;
 using System.Text.Json.Nodes;
-using Shared.Helpers;
-using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel;
 namespace Application.Services;
 
 public class WeatherService : IWeatherService
@@ -39,4 +32,9 @@ public class WeatherService : IWeatherService
         var contains = json.ContainsKey("success");
         return !contains;
     }
+}
+public interface IWeatherService
+{
+    Task<JsonObject> GetWeatherForLocation(string location);
+    bool ValidateJsonResponse(JsonObject json);
 }

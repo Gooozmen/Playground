@@ -52,10 +52,5 @@ public class UserRoleConfig : IEntityTypeConfiguration<UserRole>
             .HasColumnName("IsDeleted")
             .HasColumnOrder(9)
             .IsRequired();
-
-        builder.HasMany(r => r.Users)
-              .WithOne(u => u.Role)
-              .HasForeignKey(u => u.RoleId)
-              .OnDelete(DeleteBehavior.Restrict);
     }
 }
