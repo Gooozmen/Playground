@@ -1,6 +1,6 @@
 ﻿namespace Domain.Entities;
 
-public abstract class AuditableEntity
+public abstract class Auditable
 {
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
     public Guid CreatedBy { get; set; } = Guid.NewGuid();

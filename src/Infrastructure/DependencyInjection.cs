@@ -24,8 +24,10 @@ public static class DependencyInjection
         services.AddSingleton<IWeatherstackClient, WeatherstackClient>();
 
         // Seeders
-        services.AddTransient<ISeederService,PersonSeederService>();
-        //services.AddSingleton<IDatabaseSeeder,DatabaseSeeder>();
+        services.AddScoped<IDatabaseSeeder, DatabaseSeeder>();
+        services.AddScoped<ISeederService,PersonSeederService>();
+        services.AddScoped<ISeederService, UserRoleSeederService>();
+        services.AddScoped<ISeederService, UserSeederService>();
 
         // Add DbContext with configuration for the connection string
         services.AddDbContext<PlaygroundDbContext>(options =>
