@@ -43,6 +43,5 @@ if (environmentValidation)
         await initialiser.SeedAllAsync();
     }
 }
-
 // Start the application
 app.Run();
