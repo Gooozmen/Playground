@@ -1,14 +1,14 @@
-﻿using Infrastructure.Repositories.BaseInterfaces;
+﻿using Infrastructure.Repositories.Base;
 using System.Linq.Expressions;
 
-namespace Infrastructure.Repositories.BaseClasses;
+namespace Infrastructure.Repositories;
 
-public abstract class Repository<T> : IRepository<T> where T : class
+public abstract class BaseRepository<T> : IBaseRepository<T> where T : class
 {
     private readonly ICommandRepository<T> _commandRepository;
     private readonly IQueryRepository<T> _queryRepository;
 
-    protected Repository
+    protected BaseRepository
     (
         ICommandRepository<T> commandRepository,
         IQueryRepository<T> queryRepository

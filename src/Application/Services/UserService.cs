@@ -1,29 +1,38 @@
-﻿using Domain.Entities;
-using Infrastructure.Database;
-using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Domain.Entities;
+using Infrastructure.Repositories;
+using Shared.DTOs.User;
 
 namespace Application.Services;
 
 public class UserService : IUserService
 {
-    private readonly PlaygroundDbContext _context;
+    private readonly IUserRepository _userRepository;
+    private readonly IMapper _mapper;
 
-    public UserService(PlaygroundDbContext context)
+    public UserService(IUserRepository userRepository, IMapper mapper)
     {
-        _context = context;
+        _userRepository = userRepository;
+        _mapper = mapper;
     }
 
-    public async Task<User> ExecuteGetAsync()
+    public Task<User> ExecuteCreateUserAsync()
     {
-        var result = await _context.Users
-            .Include(r => r.Role)
-            .FirstOrDefaultAsync(x => x.FirstName.Equals("Admin"));
+        throw new NotImplementedException();
+    }
 
-        return result;
+    public async Task<UserFullResponse> ExecuteGetAsync()
+    {
+        var key = Guid.Parse("774746D8-3A5D-4ACA-A740-2488CF2337EF");
+        var user = _userRepository.GetAsync(key).Result;
+        var userResponse = _mapper.Map<UserFullResponse>(user);
+        return userResponse;
     }
 }
 
 public interface IUserService
 {
-    Task<User> ExecuteGetAsync();
+    Task<UserFullResponse> ExecuteGetAsync();
+    Task<User> ExecuteCreateUserAsync();
+
 }

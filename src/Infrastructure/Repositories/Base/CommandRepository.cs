@@ -1,9 +1,9 @@
 ﻿using Infrastructure.Extensions;
-using Infrastructure.Repositories.BaseInterfaces;
+using Infrastructure.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace Infrastructure.Repositories.BaseClasses;
+namespace Infrastructure.Repositories;
 public class CommandRepository<T> : ICommandRepository<T> where T : class
 {
     private readonly DbContext _context;

@@ -27,7 +27,6 @@ public static class DependencyInjection
         //AutoMapper
         services.AddAutoMapper(typeof(MappingProfile));
 
-
         return services;
     }
 }

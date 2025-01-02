@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Shared.Options;
 using Infrastructure.Database.Seeds;
+using Infrastructure.Repositories;
 
 namespace Infrastructure;
 
@@ -35,15 +36,18 @@ public static class DependencyInjection
             options.EnableSensitiveDataLogging();
         });
 
+        // Db Context
         services.AddScoped<IDbContextFactory<PlaygroundDbContext>, PlaygroundDbContextFactory<PlaygroundDbContext>>();
         services.AddTransient<IPlaygroundDbContext>(provider => provider.GetRequiredService<IDbContextFactory<PlaygroundDbContext>>().CreateDbContext());
         services.AddScoped<PlaygroundDbContextInitializer>();
 
-        // Register your services
+        // Repositories
+        services.AddTransient<IUserRepository, UserRepository>();
+
+        // Clients
         services.AddSingleton<IWeatherstackClient, WeatherstackClient>();
 
         // Seeders
-        services.AddScoped<IContextInitializer, PlaygroundDbContextInitializer>();
         services.AddScoped<ISeederService, PersonSeederService>();
         services.AddScoped<ISeederService, UserRoleSeederService>();
         services.AddScoped<ISeederService, UserSeederService>();

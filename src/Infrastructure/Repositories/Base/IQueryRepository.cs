@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Infrastructure.Repositories.BaseInterfaces;
+namespace Infrastructure.Repositories.Base;
 public interface IQueryRepository<T> where T : class
 {
     IQueryable<T> Queryable { get; }
