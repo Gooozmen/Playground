@@ -3,7 +3,6 @@ using Application.Factories;
 using Application.Services;
 using RandomNameGeneratorLibrary;
 using Shared.Helpers;
-using Application.Mappings;
 
 namespace Application;
 
@@ -24,9 +23,6 @@ public static class DependencyInjection
         services.AddSingleton<IPersonGeneratorHelper, PersonGeneratorHelper>();
         services.AddSingleton<IJsonHelper, JsonHelper>();
         services.AddSingleton<IDateTimeHelper, DateTimeHelper>();
-
-        //AutoMapper
-        services.AddAutoMapper(typeof(MappingProfile));
 
         return services;
     }

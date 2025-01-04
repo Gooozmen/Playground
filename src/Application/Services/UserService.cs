@@ -29,11 +29,18 @@ public class UserService : IUserService
         var userResponse = _mapper.Map<UserFullResponse>(user);
         return userResponse;
     }
+
+    public async Task ExecuteUpdateUserAsync(UpdateUserCommand userCommand)
+    {
+        var user = _mapper.Map<User>(userCommand);
+        await _userRepository.UpdatePartialAsync(user);
+        await _userRepository.SaveChangesAsync();
+    }
 }
 
 public interface IUserService
 {
     Task<UserFullResponse> ExecuteGetAsync(string userId);
     Task ExecuteCreateUserAsync(CreateUserCommand userCommand);
-
+    Task ExecuteUpdateUserAsync(UpdateUserCommand userCommand);
 }

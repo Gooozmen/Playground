@@ -38,4 +38,14 @@ public class UserController : CoreController
         await _userService.ExecuteCreateUserAsync(command);
         return Ok();
     }
+
+    [HttpPut]
+    public async Task<IActionResult> PutUser([FromBody] UpdateUserCommand command)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        await _userService.ExecuteUpdateUserAsync(command);
+        return Ok();
+    }
 }
