@@ -4,7 +4,7 @@ using AutoMapper;
 using Domain.Entities;
 using Shared.DTOs.User;
 
-namespace Application.Mappings;
+namespace Infrastructure.Mappings;
 
 public class MappingProfile : Profile
 {
@@ -17,7 +17,6 @@ public class MappingProfile : Profile
         //User
         CreateMap<CreateUserCommand, User>();
         CreateMap<User,UserFullResponse>();
-
-
+        CreateMap<UpdateUserCommand,User>();
     }
 }

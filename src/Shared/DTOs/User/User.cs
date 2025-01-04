@@ -18,6 +18,19 @@ public class CreateUserCommand
     public string Password { get; set; }
 }
 
+public class UpdateUserCommand
+{
+    [Required]
+    public Guid Id { get; set; }
+    public string? RoleId { get; set; }
+    public string? FirstName { get; set; }
+    public string? LastName { get; set; }
+    [EmailAddress]
+    public string? Email { get; set; }
+    [PasswordPropertyText]
+    public string? Password { get; set; }
+}
+
 public class UserFullResponse : Auditable
 {
     public Guid Id { get; set; }

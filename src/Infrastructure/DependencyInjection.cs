@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Infrastructure.Database.Seeds;
 using Infrastructure.Repositories;
 using Infrastructure.Interceptors;
+using Infrastructure.Mappings;
 
 namespace Infrastructure;
 
@@ -52,6 +53,9 @@ public static class DependencyInjection
         services.AddScoped<ISeederService, PersonSeederService>();
         services.AddScoped<ISeederService, UserRoleSeederService>();
         services.AddScoped<ISeederService, UserSeederService>();
+
+        //AutoMapper
+        services.AddAutoMapper(typeof(MappingProfile));
 
         return services;
     }
