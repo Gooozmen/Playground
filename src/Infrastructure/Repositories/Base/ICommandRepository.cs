@@ -30,5 +30,6 @@ public interface ICommandRepository<T> where T : class
     void UpdateRange(IEnumerable<T> items);
 
     Task UpdateRangeAsync(IEnumerable<T> items);
+    Task SaveChangesAsync();
 }
 

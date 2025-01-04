@@ -24,7 +24,7 @@ public class WeatherController : CoreController
     }
 
     [HttpGet("current")]
-    public async Task<IActionResult> GetCurrentWeather([FromQuery] string location)
+    public async Task<IActionResult> GetCurrentWeather(string location)
     {
         var response =  await _weatherService.GetWeatherForLocation(location);
         var success = _weatherService.ValidateJsonResponse(response);

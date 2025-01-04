@@ -14,11 +14,11 @@ public class CommandRepository<T> : ICommandRepository<T> where T : class
 
     public void Add(T item) => Set.Add(item);
 
-    public Task AddAsync(T item) => Set.AddAsync(item).AsTask();
+    public async Task AddAsync(T item) => await Set.AddAsync(item).AsTask();
 
     public void AddRange(IEnumerable<T> items) => Set.AddRange(items);
 
-    public Task AddRangeAsync(IEnumerable<T> items) => Set.AddRangeAsync(items);
+    public async Task AddRangeAsync(IEnumerable<T> items) => await Set.AddRangeAsync(items);
 
     public void Delete(object key)
     {
@@ -38,9 +38,9 @@ public class CommandRepository<T> : ICommandRepository<T> where T : class
         Set.RemoveRange(items);
     }
 
-    public Task DeleteAsync(object key) => Task.Run(() => Delete(key));
+    public async Task DeleteAsync(object key) => await Task.Run(() => Delete(key));
 
-    public Task DeleteAsync(Expression<Func<T, bool>> where) => Task.Run(() => Delete(where));
+    public async Task DeleteAsync(Expression<Func<T, bool>> where) => await Task.Run(() => Delete(where));
 
     public void Update(T item)
     {
@@ -55,7 +55,7 @@ public class CommandRepository<T> : ICommandRepository<T> where T : class
         _context.Update(item);
     }
 
-    public Task UpdateAsync(T item) => Task.Run(() => Update(item));
+    public async Task UpdateAsync(T item) => await Task.Run(() => Update(item));
 
     public void UpdatePartial(object item)
     {
@@ -83,10 +83,12 @@ public class CommandRepository<T> : ICommandRepository<T> where T : class
         }
     }
 
-    public Task UpdatePartialAsync(object item) => Task.Run(() => UpdatePartial(item));
+    public async Task UpdatePartialAsync(object item) => await Task.Run(() => UpdatePartial(item));
 
     public void UpdateRange(IEnumerable<T> items) => Set.UpdateRange(items);
 
-    public Task UpdateRangeAsync(IEnumerable<T> items) => Task.Run(() => UpdateRange(items));
+    public async Task UpdateRangeAsync(IEnumerable<T> items) => await Task.Run(() => UpdateRange(items));
+
+    public async Task SaveChangesAsync() => await _context.SaveChangesAsync();
 }
 

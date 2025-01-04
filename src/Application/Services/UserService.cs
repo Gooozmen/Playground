@@ -16,15 +16,16 @@ public class UserService : IUserService
         _mapper = mapper;
     }
 
-    public Task<User> ExecuteCreateUserAsync()
+    public async Task ExecuteCreateUserAsync(CreateUserCommand userCommand)
     {
-        throw new NotImplementedException();
+        var user = _mapper.Map<User>(userCommand);
+        await _userRepository.AddAsync(user);
+        await _userRepository.SaveChangesAsync();
     }
 
-    public async Task<UserFullResponse> ExecuteGetAsync()
+    public async Task<UserFullResponse> ExecuteGetAsync(string userId)
     {
-        var key = Guid.Parse("774746D8-3A5D-4ACA-A740-2488CF2337EF");
-        var user = _userRepository.GetAsync(key).Result;
+        var user = await _userRepository.GetAsync(new Guid(userId));
         var userResponse = _mapper.Map<UserFullResponse>(user);
         return userResponse;
     }
@@ -32,7 +33,7 @@ public class UserService : IUserService
 
 public interface IUserService
 {
-    Task<UserFullResponse> ExecuteGetAsync();
-    Task<User> ExecuteCreateUserAsync();
+    Task<UserFullResponse> ExecuteGetAsync(string userId);
+    Task ExecuteCreateUserAsync(CreateUserCommand userCommand);
 
 }
