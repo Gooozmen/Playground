@@ -4,9 +4,9 @@ using Infrastructure.ApplicationHttpClient;
 using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using Shared.Options;
 using Infrastructure.Database.Seeds;
 using Infrastructure.Repositories;
+using Infrastructure.Interceptors;
 
 namespace Infrastructure;
 
@@ -40,6 +40,7 @@ public static class DependencyInjection
         services.AddScoped<IDbContextFactory<PlaygroundDbContext>, PlaygroundDbContextFactory<PlaygroundDbContext>>();
         services.AddTransient<IPlaygroundDbContext>(provider => provider.GetRequiredService<IDbContextFactory<PlaygroundDbContext>>().CreateDbContext());
         services.AddScoped<PlaygroundDbContextInitializer>();
+        services.AddScoped<DatabaseChangesInterceptor>();
 
         // Repositories
         services.AddTransient<IUserRepository, UserRepository>();

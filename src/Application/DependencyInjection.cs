@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.AddSingleton<INumericHelper, NumericHelper>();
         services.AddSingleton<IPersonGeneratorHelper, PersonGeneratorHelper>();
         services.AddSingleton<IJsonHelper, JsonHelper>();
+        services.AddSingleton<IDateTimeHelper, DateTimeHelper>();
 
         //AutoMapper
         services.AddAutoMapper(typeof(MappingProfile));
