@@ -23,6 +23,7 @@ public static class DependencyInjection
         services.AddSingleton<IPersonGeneratorHelper, PersonGeneratorHelper>();
         services.AddSingleton<IJsonHelper, JsonHelper>();
         services.AddSingleton<IDateTimeHelper, DateTimeHelper>();
+        services.AddSingleton<IPatchingHelper, PatchingHelper>();
 
         return services;
     }

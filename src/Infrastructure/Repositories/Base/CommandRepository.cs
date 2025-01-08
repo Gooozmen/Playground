@@ -66,20 +66,16 @@ public class CommandRepository<T> : ICommandRepository<T> where T : class
         if (entity is null) return;
 
         var entry = _context.Entry(entity);
+        var itemProperties = item.GetType().GetProperties();
 
-        entry.CurrentValues.SetValues(item);
-
-        foreach (var navigation in entry.Metadata.GetNavigations())
+        foreach (var property in itemProperties)
         {
-            if (navigation.IsOnDependent || navigation.IsCollection || !navigation.ForeignKey.IsOwnership) continue;
+            var itemValue = property.GetValue(item);
 
-            var property = item.GetType().GetProperty(navigation.Name);
+            var entityProperty = entry.CurrentValues.Properties.FirstOrDefault(p => p.Name == property.Name);
 
-            if (property is null) continue;
-
-            var value = property.GetValue(item, default);
-
-            entry.Reference(navigation.Name).TargetEntry?.CurrentValues.SetValues(value!);
+            if (itemValue != null && !itemValue.Equals(0) && !itemValue.Equals(string.Empty))
+                entry.CurrentValues[entityProperty.Name] = itemValue;
         }
     }
 
