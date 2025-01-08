@@ -2,18 +2,26 @@
 using Domain.Entities;
 using Infrastructure.Repositories;
 using Shared.DTOs.User;
+using Shared.Helpers;
 
 namespace Application.Services;
 
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
+    private readonly IPatchingHelper _patchingHelper;
     private readonly IMapper _mapper;
 
-    public UserService(IUserRepository userRepository, IMapper mapper)
+    public UserService
+    (
+        IUserRepository userRepository, 
+        IMapper mapper,
+        IPatchingHelper patchingHelper
+    )
     {
         _userRepository = userRepository;
         _mapper = mapper;
+        _patchingHelper = patchingHelper;
     }
 
     public async Task ExecuteCreateUserAsync(CreateUserCommand userCommand)
