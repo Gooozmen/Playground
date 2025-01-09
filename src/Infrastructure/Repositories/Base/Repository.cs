@@ -5,7 +5,7 @@ namespace Infrastructure.Repositories;
 
 public class Repository<T> : BaseRepository<T> where T : class
 {
-    public Repository(PlaygroundDbContext context) 
+    public Repository(ApplicationDbContext context) 
         : base
         (
             new CommandRepository<T>(context), 

@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database;
 
-public class PlaygroundDbContextInitializer : IContextInitializer
+public class ApplicationDbContextInitializer : IContextInitializer
 {
     private readonly IEnumerable<ISeederService> _seeders;
-    private readonly PlaygroundDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public PlaygroundDbContextInitializer(IEnumerable<ISeederService> seeders,PlaygroundDbContext context)
+    public ApplicationDbContextInitializer(IEnumerable<ISeederService> seeders,ApplicationDbContext context)
     {
         _seeders = seeders;
         _context = context;

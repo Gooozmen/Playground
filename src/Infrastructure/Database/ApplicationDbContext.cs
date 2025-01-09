@@ -1,10 +1,12 @@
 ﻿using Domain.Entities;
+using Domain.Identities;
 using Infrastructure.Interceptors;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database;
 
-public class PlaygroundDbContext : DbContext, IPlaygroundDbContext
+public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Guid>, IPlaygroundDbContext
 {
     private readonly DatabaseChangesInterceptor _interceptor;
 
@@ -12,7 +14,7 @@ public class PlaygroundDbContext : DbContext, IPlaygroundDbContext
     public virtual DbSet<User> Users { get; set; }
     public virtual DbSet<UserRole> UserRoles { get; set; } 
 
-    public PlaygroundDbContext(DbContextOptions<PlaygroundDbContext> options, DatabaseChangesInterceptor interceptor) 
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, DatabaseChangesInterceptor interceptor) 
         : base(options)
     {
         _interceptor = interceptor;
@@ -20,7 +22,7 @@ public class PlaygroundDbContext : DbContext, IPlaygroundDbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PlaygroundDbContext).Assembly);
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
         base.OnModelCreating(modelBuilder);
     }
 

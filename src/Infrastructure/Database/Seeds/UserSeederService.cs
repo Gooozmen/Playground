@@ -6,9 +6,9 @@ namespace Infrastructure.Database.Seeds;
 
 public class UserSeederService : ISeederService
 {
-    private readonly PlaygroundDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public UserSeederService(PlaygroundDbContext context)
+    public UserSeederService(ApplicationDbContext context)
     {
         _context = context;
     }

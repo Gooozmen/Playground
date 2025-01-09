@@ -7,7 +7,7 @@ namespace Infrastructure.Repositories;
 
 public class UserRepository : Repository<User>, IUserRepository
 {
-    public UserRepository(PlaygroundDbContext context) : base(context)
+    public UserRepository(ApplicationDbContext context) : base(context)
     {}
 }
 

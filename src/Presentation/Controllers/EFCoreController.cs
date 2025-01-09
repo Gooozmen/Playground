@@ -7,9 +7,9 @@ namespace Presentation.Controllers;
 
 public class EFCoreController : CoreController
 {
-    private readonly PlaygroundDbContext _context;
+    private readonly ApplicationDbContext _context;
 
-    public EFCoreController(PlaygroundDbContext context)
+    public EFCoreController(ApplicationDbContext context)
     {
         _context = context;
     }
