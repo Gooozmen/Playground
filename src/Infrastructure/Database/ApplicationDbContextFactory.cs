@@ -2,11 +2,11 @@
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure.Database;
-public class PlaygroundDbContextFactory<TContext> : IDbContextFactory<TContext> where TContext : DbContext
+public class ApplicationDbContextFactory<TContext> : IDbContextFactory<TContext> where TContext : DbContext
 {
     private readonly IServiceProvider _provider;
 
-    public PlaygroundDbContextFactory(IServiceProvider provider)
+    public ApplicationDbContextFactory(IServiceProvider provider)
     {
         _provider = provider;
     }

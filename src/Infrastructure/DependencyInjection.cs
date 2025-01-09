@@ -8,6 +8,9 @@ using Infrastructure.Database.Seeds;
 using Infrastructure.Repositories;
 using Infrastructure.Interceptors;
 using Infrastructure.Mappings;
+using Domain.Identities;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Infrastructure;
 
@@ -22,14 +25,14 @@ public static class DependencyInjection
 
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<PlaygroundDbContext>(options =>
+        services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseSqlServer
             (
                 configuration.GetConnectionString("PlaygroundDb"),
                 builder =>
                 {
-                    builder.MigrationsAssembly(typeof(PlaygroundDbContext).Assembly.FullName);
+                    builder.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
                     builder.CommandTimeout(15);
                 }
             );
@@ -38,9 +41,15 @@ public static class DependencyInjection
         });
 
         // Db Context
-        services.AddScoped<IDbContextFactory<PlaygroundDbContext>, PlaygroundDbContextFactory<PlaygroundDbContext>>();
-        services.AddTransient<IPlaygroundDbContext>(provider => provider.GetRequiredService<IDbContextFactory<PlaygroundDbContext>>().CreateDbContext());
-        services.AddScoped<PlaygroundDbContextInitializer>();
+        services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddUserStore<UserStore<ApplicationUser,ApplicationRole,ApplicationDbContext,Guid>>()
+                .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>()
+                .AddDefaultTokenProviders();
+
+        services.AddScoped<IDbContextFactory<ApplicationDbContext>, ApplicationDbContextFactory<ApplicationDbContext>>();
+        services.AddTransient<IPlaygroundDbContext>(provider => provider.GetRequiredService<IDbContextFactory<ApplicationDbContext>>().CreateDbContext());
+        services.AddScoped<ApplicationDbContextInitializer>();
         services.AddScoped<DatabaseChangesInterceptor>();
 
         // Repositories

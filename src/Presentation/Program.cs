@@ -38,7 +38,7 @@ if (environmentValidation)
     app.UseDeveloperExceptionPage();
     using (var scope = app.Services.CreateScope())
     {
-        var initialiser = scope.ServiceProvider.GetRequiredService<PlaygroundDbContextInitializer>();
+        var initialiser = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitializer>();
         await initialiser.InitialiseAsync();
         await initialiser.SeedAllAsync();
     }
