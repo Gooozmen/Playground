@@ -22,6 +22,7 @@ builder.Services.AddControllers().AddCustomJsonOptions();
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication();
 builder.Services.AddCoreServices();
+builder.Configuration.AddDefaultConfiguration<Program>();
 
 var app = builder.Build();
 

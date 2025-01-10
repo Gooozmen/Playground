@@ -22,6 +22,17 @@ public static class DependencyInjection
 
         return services;
     }
+    public static IConfigurationBuilder AddDefaultConfiguration<T>(this IConfigurationBuilder configurationBuilder) where T : class
+    {
+        // Add appsettings.json
+        configurationBuilder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+
+        // Add user secrets
+        configurationBuilder.AddUserSecrets<T>();
+
+        return configurationBuilder;
+    }
 }
 
 

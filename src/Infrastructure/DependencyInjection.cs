@@ -11,6 +11,7 @@ using Infrastructure.Mappings;
 using Domain.Identities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Infrastructure.Managers;
 
 namespace Infrastructure;
 
@@ -41,10 +42,10 @@ public static class DependencyInjection
         });
 
         // Db Context
-        services.AddIdentity<ApplicationUser, IdentityRole>()
+        services.AddIdentity<ApplicationUser, ApplicationRole>() // Use ApplicationRole instead of IdentityRole
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddUserStore<UserStore<ApplicationUser,ApplicationRole,ApplicationDbContext,Guid>>()
-                .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>()
+                .AddUserStore<UserStore<ApplicationUser, ApplicationRole, ApplicationDbContext, Guid>>() // Match your custom user and role types
+                .AddRoleStore<RoleStore<ApplicationRole, ApplicationDbContext, Guid>>() // Match your custom role type
                 .AddDefaultTokenProviders();
 
         services.AddScoped<IDbContextFactory<ApplicationDbContext>, ApplicationDbContextFactory<ApplicationDbContext>>();
@@ -58,6 +59,9 @@ public static class DependencyInjection
         // Clients
         services.AddSingleton<IWeatherstackClient, WeatherstackClient>();
 
+        //facade
+        services.AddSingleton<IApplicationUserManager, ApplicationUserManager>();
+
         // Seeders
         services.AddScoped<ISeederService, PersonSeederService>();
         services.AddScoped<ISeederService, UserRoleSeederService>();
@@ -68,6 +72,5 @@ public static class DependencyInjection
 
         return services;
     }
-
 }
 
