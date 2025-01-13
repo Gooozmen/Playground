@@ -8,6 +8,7 @@
     <IsTestProject>true</IsTestProject>
     <OutputPath>..\..\Output\</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <IsPublishable>false</IsPublishable>
   </PropertyGroup>
 
   <ItemGroup>
