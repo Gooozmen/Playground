@@ -33,6 +33,7 @@ app.UseInfrastructure(); // Custom middleware configuration (e.g., authenticatio
 app.UseStaticFiles(); // Serve static files (should come early to serve files directly)
 app.UseRouting(); // Enable routing for middleware and endpoints
 app.MapControllers(); // Map controllers to endpoints
+app.UsePresentation();
 
 if (environmentValidation)
 {

@@ -19,6 +19,9 @@ public static class DependencyInjection
         //Singletons
         services.AddSingleton<IEnvironmentValidator, EnvironmentValidator>();
 
+        //Swagger
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen();
 
         return services;
     }
@@ -27,14 +30,16 @@ public static class DependencyInjection
         // Add appsettings.json
         configurationBuilder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
 
-
         // Add user secrets
         configurationBuilder.AddUserSecrets<T>();
 
         return configurationBuilder;
     }
+
+    public static IApplicationBuilder UsePresentation(this IApplicationBuilder app)
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+        return app;
+    }
 }
-
-
-
-

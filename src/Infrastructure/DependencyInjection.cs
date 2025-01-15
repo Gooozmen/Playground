@@ -60,7 +60,7 @@ public static class DependencyInjection
         services.AddSingleton<IWeatherstackClient, WeatherstackClient>();
 
         //facade
-        services.AddSingleton<IApplicationUserManager, ApplicationUserManager>();
+        services.AddScoped<IApplicationUserManager, ApplicationUserManager>();
 
         // Seeders
         services.AddScoped<ISeederService, PersonSeederService>();
