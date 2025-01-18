@@ -38,17 +38,17 @@ jobs:
       working-directory: .\Build
       run: .\RunTests.ps1
 
-      # Step 4: Upload the .trx file as an artifact
+    # Step 4: Upload the .trx file as an artifact
     - name: Upload Test Results (.trx)
       uses: actions/upload-artifact@v3
       with:
         name: test-results
-        path: Artifacts\TestResults.trx
+        path: Artifacts/TestResults.trx
 
     # Step 5: Parse and display the test results
     - name: Report Test Results
       uses: dorny/test-reporter@v1
       with:
         name: Test Results
-        path: Artifacts\TestResults.trx
+        path: Artifacts/TestResults.trx
         reporter: dotnet-trx
