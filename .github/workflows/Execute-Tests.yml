@@ -43,14 +43,12 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: test-results
-        working-directory: .\Artifacts
-        path: .\TestsResults.trx
+        path: Artifacts\TestResults.trx
 
     # Step 5: Parse and display the test results
     - name: Report Test Results
       uses: dorny/test-reporter@v1
       with:
         name: Test Results
-        working-directory: .\Artifacts
-        path: .\TestsResults.trx
+        path: Artifacts\TestResults.trx
         reporter: dotnet-trx
