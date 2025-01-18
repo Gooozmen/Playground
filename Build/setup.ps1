@@ -12,6 +12,7 @@ function Add-PackageSource([string] $Command){
 
     nuget sources $Command -Name "github" -Source "https://nuget.pkg.github.com/Gooozmen/index.json" -username $Username -password $Password
 }
+
 function Set-PackageSource{
     $sources = nuget sources list
     if($sources -like "*https://nuget.pkg.github.com/Gooozmen/index.json*"){
@@ -45,8 +46,7 @@ function Clear-NugetCache{
 
 Clear-NugetCache
 Set-PackageSource
-Remove-Folder -FolderArray @("..\Dependencies\psake*","..\Dependencies\Toolkit*")
+Remove-Folder -FolderArray @("..\Dependencies\psake*","..\Dependencies\Toolkit*","..\Artifacts\**")
 Install-Toolkit
 Import-ToolkitSetup
-
 

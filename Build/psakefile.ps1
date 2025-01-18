@@ -14,5 +14,14 @@ $TestDllPath = "$OutputPath\Tests.dll"
 $TestsLogOutput = $ArtifactsPath
 
 
-# dotnet test C:\Git\Playground\Output\Tests.dll --logger "trx;LogFileName=TestsResult.trx" --results-directory C:\Git\Playground\Artifacts\
-  dotnet test C:\Git\Playground\Output\Tests.dll --logger 'trx;LogFileName=TestResults.trx' --results-directory C:\Git\Playground\Artifacts
+
+$ArtifactsFolder = $ArtifactsPath 
+$DestinationFolder = "$ArtifactsFolder\Application.zip"
+$ProjectArtifact = $DestinationFolder
+
+$BucketName = $ENV:AWS_S3_NAME
+$S3Key = $ENV:AWS_S3_PATHKEY
+$Region = $ENV:AWS_S3_REGION
+$AccessKey = $ENV:AWS_S3_ACCESSKEY
+$SecretKey = $ENV:AWS_S3_SECTRETKEY 
+$FileKey = "Playground-Api"
