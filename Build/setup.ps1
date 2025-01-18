@@ -1,8 +1,18 @@
 function Add-PackageSource([string] $Command){
-    nuget sources $Command -Name "github" -Source "https://nuget.pkg.github.com/Gooozmen/index.json" -username Gooozmen -password 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
-}
+    $Username = $env:NUGET_USERNAME
+    $Password = $env:NUGET_PASSWORD
+    Write-Output "Username $Username"
+    Write-Output "PASS $Password"
 
-function Verify-PackageSource{
+
+    if (-not $Username -or -not $Password) {
+        Write-Error "Environment variables NUGET_USERNAME or NUGET_PASSWORD are not set."
+        return
+    }
+
+    nuget sources $Command -Name "github" -Source "https://nuget.pkg.github.com/Gooozmen/index.json" -username $Username -password $Password
+}
+function Set-PackageSource{
     $sources = nuget sources list
     if($sources -like "*https://nuget.pkg.github.com/Gooozmen/index.json*"){
         Add-PackageSource -Command "update"
@@ -34,7 +44,7 @@ function Clear-NugetCache{
 }
 
 Clear-NugetCache
-Verify-PackageSource
+Set-PackageSource
 Remove-Folder -FolderArray @("..\Dependencies\psake*","..\Dependencies\Toolkit*")
 Install-Toolkit
 Import-ToolkitSetup

@@ -1,0 +1,51 @@
+# This workflow will build a .NET project
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+
+name: .NET Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  Unit-Tests:
+
+    runs-on: Windows-latest
+    defaults:
+      run:
+        shell: pwsh
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    - name: Setup
+      working-directory: .\Build
+      run: .\setup.ps1
+      
+    - name: Build
+      working-directory: .\Build
+      run: .\RunTests.ps1
+
+      # Step 4: Upload the .trx file as an artifact
+    - name: Upload Test Results (.trx)
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: Artifacts\TestResults.trx
+
+    # Step 5: Parse and display the test results
+    - name: Report Test Results
+      uses: dorny/test-reporter@v1
+      with:
+        name: Test Results
+        path: Artifacts\TestResults.trx
+        reporter: dotnet-trx
