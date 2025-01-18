@@ -34,7 +34,7 @@ jobs:
           NUGET_USERNAME: ${{ secrets.NUGET_USERNAME }}
           NUGET_PASSWORD: ${{ secrets.NUGET_PASSWORD }}
       
-    - name: Build
+    - name: Unit Tests
       working-directory: .\Build
       run: .\RunTests.ps1
 

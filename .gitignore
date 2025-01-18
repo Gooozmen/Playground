@@ -8,4 +8,4 @@ Tests/*/obj/
 Dependencies/*
 # Exclude (keep) a specific file
 Dependencies/.gitkeep
-Artifacts/*.trx
+
