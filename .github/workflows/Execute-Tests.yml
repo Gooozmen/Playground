@@ -30,6 +30,9 @@ jobs:
     - name: Setup
       working-directory: .\Build
       run: .\setup.ps1
+      env:
+          NUGET_USERNAME: ${{ secrets.NUGET_USERNAME }}
+          NUGET_PASSWORD: ${{ secrets.NUGET_PASSWORD }}
       
     - name: Build
       working-directory: .\Build
