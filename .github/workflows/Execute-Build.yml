@@ -13,6 +13,11 @@ on:
 jobs:
   build:
 
+    permissions:  # Add permissions for test reporting
+      contents: read
+      actions: read
+      checks: write
+
     runs-on: Windows-latest
     defaults:
       run:
