@@ -51,7 +51,6 @@ jobs:
 
     # Step 6: Parse and Display the Test Results
     - name: Report Test Results
-      if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository  # Skip for forked PRs
       uses: dorny/test-reporter@v1
       with:
         name: Test Results
