@@ -43,11 +43,11 @@ jobs:
       run: ./RunTests.ps1
 
     # Step 5: Upload the .trx file as an artifact
-    - name: Upload Test Results (.trx)
-      uses: actions/upload-artifact@v3
-      with:
-        name: test-results
-        path: Artifacts/TestResults.trx
+    # - name: Upload Test Results (.trx)
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: test-results
+    #     path: Artifacts/TestResults.trx
 
     # Step 6: Parse and Display the Test Results
     - name: Report Test Results
