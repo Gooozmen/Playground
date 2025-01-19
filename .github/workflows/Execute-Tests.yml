@@ -1,10 +1,6 @@
 name: .NET Test
 
 on:
-  push:
-    branches: [ "main" ]
-  pull_request_target:  # Use pull_request_target to ensure proper permissions for forks
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:

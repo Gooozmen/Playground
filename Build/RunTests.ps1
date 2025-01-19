@@ -1,2 +1,2 @@
 $psakeFilePath = ".\psakefile.ps1"
-& (Resolve-Path "..\Dependencies\psake*\tools\psake\psake.ps1") $psakeFilePath Execute-DotnetTests
+& (Resolve-Path "..\Dependencies\psake*\tools\psake\psake.ps1") $psakeFilePath Execute-TestsNoBuild
