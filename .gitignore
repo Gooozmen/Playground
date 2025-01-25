@@ -1,4 +1,5 @@
 src/.vs/
+src/.idea/
 .vs/
 Output/
 src/*/bin/

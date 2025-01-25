@@ -34,9 +34,19 @@ function Import-ToolkitSetup{
     . $ToolkitPath
 }
 
-function Remove-Folder([string[]] $FolderArray){
-    foreach($_ in $FolderArray){
-        If(Test-Path("$_")) {Remove-Item $_ -Recurse }
+function Remove-Folder([string[]] $PathsArray){
+    Write-Host "Cleaning Folders"
+    foreach ($_ in $PathsArray) {
+        $AbsolutePath = Resolve-Path "$_"
+        Write-Host "Verifying $_ content"
+        if(Test-Path $AbsolutePath){
+            # $content = Get-ChildItem -Path $AbsolutePath -Force
+            # Write-Host "Content: $content"
+            Get-ChildItem -Path $AbsolutePath -Force | Remove-Item -Recurse -Force
+        }
+        else{
+            Write-Host "$_ doesnt exist"
+        }
     }
 }
 
@@ -44,9 +54,9 @@ function Clear-NugetCache{
     nuget locals all -clear
 }
 
+Remove-Folder -PathsArray @("..\Dependencies","..\Artifacts","..\Output")
 Clear-NugetCache
 Set-PackageSource
-Remove-Folder -FolderArray @("..\Dependencies\psake*","..\Dependencies\Toolkit*","..\Artifacts\**")
 Install-Toolkit
 Import-ToolkitSetup
 

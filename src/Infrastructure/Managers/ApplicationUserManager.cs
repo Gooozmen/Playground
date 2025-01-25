@@ -1,41 +1,48 @@
-﻿using Domain.Identities;
+﻿using AutoMapper;
+using Domain.Identities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using Shared.DTOs.ApplicationUser;
 
 namespace Infrastructure.Managers;
 
 public class ApplicationUserManager : IApplicationUserManager
 {
-    private readonly UserManager<ApplicationUser> _userManager;
+    private readonly IServiceProvider _serviceProvider;
 
-    public ApplicationUserManager(UserManager<ApplicationUser> userManager)
+    public ApplicationUserManager(IServiceProvider serviceProvider)
     {
-        _userManager = userManager;
+        _serviceProvider = serviceProvider;
     }
 
-    public async Task<IdentityResult> RegisterUserAsync(string email, string password)
+    public async Task<IdentityResult> RegisterUserAsync(CreateApplicationUserCommand command)
     {
-        var user = new ApplicationUser { UserName = email, Email = email };
-        return await _userManager.CreateAsync(user, password);
+        var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var mapper = _serviceProvider.GetRequiredService<IMapper>();
+        var user = mapper.Map<ApplicationUser>(command);
+        return await userManager.CreateAsync(user);
     }
 
     public async Task<bool> AuthenticateUserAsync(string email, string password)
     {
-        var user = await _userManager.FindByEmailAsync(email);
+        var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var user = await userManager.FindByEmailAsync(email);
         if (user == null) return false;
-        return await _userManager.CheckPasswordAsync(user, password);
+        return await userManager.CheckPasswordAsync(user, password);
     }
 
     public async Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword)
     {
-        var user = await _userManager.FindByIdAsync(userId);
+        var userManager = _serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+        var user = await userManager.FindByIdAsync(userId);
         if (user == null) throw new Exception("User not found.");
-        return await _userManager.ChangePasswordAsync(user, currentPassword, newPassword);
+        return await userManager.ChangePasswordAsync(user, currentPassword, newPassword);
     }
 }
 
 public interface IApplicationUserManager
 {
-    Task<bool> AuthenticateUserAsync(string email, string password);
+    Task<bool> AuthenticateUserAsync(AuthenticateApplicationUserCommand command);
     Task<IdentityResult> ChangePasswordAsync(string userId, string currentPassword, string newPassword);
-    Task<IdentityResult> RegisterUserAsync(string email, string password);
+    Task<IdentityResult> RegisterUserAsync(CreateApplicationUserCommand command);
 }
