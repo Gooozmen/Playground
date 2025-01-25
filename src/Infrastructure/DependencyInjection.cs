@@ -63,8 +63,6 @@ public static class DependencyInjection
         services.AddScoped<IApplicationUserManager, ApplicationUserManager>();
 
         // Seeders
-        services.AddScoped<ISeederService, PersonSeederService>();
-        services.AddScoped<ISeederService, UserRoleSeederService>();
         services.AddScoped<ISeederService, UserSeederService>();
 
         //AutoMapper

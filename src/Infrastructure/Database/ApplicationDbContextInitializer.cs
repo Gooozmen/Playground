@@ -29,10 +29,6 @@ public class ApplicationDbContextInitializer : IContextInitializer
 
     public async Task SeedAllAsync()
     {
-        var personSeeder = _seeders.FirstOrDefault(seeder => seeder.GetType() == typeof(PersonSeederService));
-        if (personSeeder != null) await personSeeder.SeedAsync();
-        var userRoleSeeder = _seeders.FirstOrDefault(seeder => seeder.GetType() == typeof(UserRoleSeederService));
-        if (userRoleSeeder != null) await userRoleSeeder.SeedAsync();
         var userSeeder = _seeders.FirstOrDefault(seeder => seeder.GetType() == typeof(UserSeederService));
         if (userSeeder != null) await userSeeder.SeedAsync();
 

@@ -10,9 +10,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser,Applicatio
 {
     private readonly DatabaseChangesInterceptor _interceptor;
 
-    public virtual DbSet<Person> Persons { get; set; }
     public virtual DbSet<User> Users { get; set; }
-    public virtual DbSet<UserRole> UserRoles { get; set; } 
+    public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
+    public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, DatabaseChangesInterceptor interceptor) 
         : base(options)
@@ -32,8 +32,11 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser,Applicatio
 
 public interface IPlaygroundDbContext
 {
-    DbSet<Person> Persons { get; set; }
+    //Identity 
+    DbSet<ApplicationUser> ApplicationUsers { get; set; }
+    DbSet<ApplicationRole> ApplicationRoles { get; set; }
+
+    //Domain Models
     DbSet<User> Users { get; set; }
-    DbSet<UserRole> UserRoles { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
 }

@@ -9,15 +9,11 @@ public class UserConfig : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasKey(x => x.Id);
-        builder.ToTable("User");
+        builder.ToTable("UserInfo");
 
         builder.Property(p => p.Id)
             .HasColumnName("Id")
             .HasColumnOrder(1);
-
-        builder.Property(p => p.RoleId)
-            .HasColumnName("RoleId")
-            .HasColumnOrder (2);
 
         builder.Property(p => p.FirstName)
             .HasColumnName("FirstName")
@@ -26,14 +22,6 @@ public class UserConfig : IEntityTypeConfiguration<User>
         builder.Property(p => p.LastName)
             .HasColumnName("LastName")
             .HasColumnOrder(4);
-
-        builder.Property(p => p.Email)
-            .HasColumnName("Email")
-            .HasColumnOrder(5);
-
-        builder.Property(p => p.Password)
-            .HasColumnName("Password")
-            .HasColumnOrder(6);
 
         builder.Property(p => p.CreatedAt)
             .HasColumnName("CreatedAt")
@@ -67,11 +55,7 @@ public class UserConfig : IEntityTypeConfiguration<User>
             .HasColumnName("IsDeleted")
             .HasColumnOrder(13)
             .IsRequired();
-
-        builder.HasOne(p => p.Role)
-               .WithMany(u => u.Users)
-               .HasForeignKey(u => u.RoleId)
-               .OnDelete(DeleteBehavior.Restrict);
+        
     }
     
 }

@@ -21,19 +21,13 @@ public class UserSeederService : ISeederService
             {
                 new User
                 {
-                    RoleId = "A1",
                     FirstName = "Admin",
-                    LastName = "User",
-                    Email = "admin@example.com",
-                    Password = "Admin123!"
+                    LastName = "User"
                 },
                 new User
                 {
-                    RoleId = "C1",
                     FirstName = "John",
                     LastName = "Doe",
-                    Email = "john.doe@example.com",
-                    Password = "John123!" // Ideally, hash this password
                 }
             };
             await _context.Users.AddRangeAsync(users);

@@ -10,3 +10,4 @@ Dependencies/*
 # Exclude (keep) a specific file
 Dependencies/.gitkeep
 
+src/Playground.sln.DotSettings.user
