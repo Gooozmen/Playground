@@ -4,32 +4,36 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.EntityConfig;
 
-public class ApplicationRoleConfig: IEntityTypeConfiguration<ApplicationRole>
+public class ApplicationRoleClaimConfig: IEntityTypeConfiguration<ApplicationRoleClaim>
 {
-    public void Configure(EntityTypeBuilder<ApplicationRole> builder)
+     public void Configure(EntityTypeBuilder<ApplicationRoleClaim> builder)
     {
-        builder.ToTable("AspNetRoles");
+        // Table name
+        builder.ToTable("AspNetRoleClaims");
+
+        // Primary key
         builder.HasKey(x => x.Id);
 
-        // Column configurations
+        // Properties
         builder.Property(x => x.Id)
             .HasColumnName("Id")
             .HasColumnOrder(1)
             .IsRequired();
 
-        builder.Property(x => x.Name)
-            .HasColumnName("Name")
+        builder.Property(x => x.RoleId)
+            .HasColumnName("RoleId")
             .HasColumnOrder(2)
-            .HasMaxLength(256);
+            .IsRequired();
 
-        builder.Property(x => x.NormalizedName)
-            .HasColumnName("NormalizedName")
+        builder.Property(x => x.ClaimType)
+            .HasColumnName("ClaimType")
             .HasColumnOrder(3)
-            .HasMaxLength(256);
+            .HasMaxLength(100); // Assuming a max length for ClaimType
 
-        builder.Property(x => x.ConcurrencyStamp)
-            .HasColumnName("ConcurrencyStamp")
-            .HasColumnOrder(4);
+        builder.Property(x => x.ClaimValue)
+            .HasColumnName("ClaimValue")
+            .HasColumnOrder(4)
+            .HasMaxLength(100); // Assuming a max length for ClaimValue
 
         // Audit properties
         builder.Property(x => x.CreatedAt)
@@ -62,5 +66,13 @@ public class ApplicationRoleConfig: IEntityTypeConfiguration<ApplicationRole>
             .HasColumnName("IsDeleted")
             .HasColumnOrder(11)
             .IsRequired();
+
+        // Foreign key relationship
+        builder.HasOne<ApplicationRole>()
+            .WithMany()
+            .HasForeignKey(x => x.RoleId)
+            .OnDelete(DeleteBehavior.Cascade)
+            .HasConstraintName("FK_AspNetRoleClaims_AspNetRoles_RoleId");
     }
+
 }

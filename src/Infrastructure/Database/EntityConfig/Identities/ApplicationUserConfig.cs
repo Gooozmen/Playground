@@ -8,11 +8,13 @@ public class ApplicationUserConfig: IEntityTypeConfiguration<ApplicationUser>
 {
     public void Configure(EntityTypeBuilder<ApplicationUser> builder)
     {
-         // Table name and primary key
+        // Table name
         builder.ToTable("AspNetUsers");
+
+        // Primary key
         builder.HasKey(x => x.Id);
 
-        // Column configurations
+        // Properties
         builder.Property(x => x.Id)
             .HasColumnName("Id")
             .HasColumnOrder(1)
@@ -114,6 +116,5 @@ public class ApplicationUserConfig: IEntityTypeConfiguration<ApplicationUser>
             .HasColumnName("IsDeleted")
             .HasColumnOrder(22)
             .IsRequired();
-    
     }
 }

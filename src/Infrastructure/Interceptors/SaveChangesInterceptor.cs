@@ -37,6 +37,7 @@ public class DatabaseChangesInterceptor : SaveChangesInterceptor
             if (entry.State == EntityState.Added)
             {
                 entry.Entity.CreatedAt = _dateTimeHelper.Now;
+                entry.Entity.CreatedBy = "c1e96611-a4b5-425e-84b5-4048d68321e6"
             }
 
             //if (entry.State == EntityState.Added || entry.State == EntityState.Modified || entry.HasChangedOwnedEntities())

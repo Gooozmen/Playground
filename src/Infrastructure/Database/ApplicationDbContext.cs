@@ -1,18 +1,19 @@
 ﻿using Domain.Entities;
 using Domain.Identities;
 using Infrastructure.Interceptors;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database;
 
-public class ApplicationDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,Guid>, IPlaygroundDbContext
+public class ApplicationDbContext : IdentityDbContext
+<ApplicationUser, ApplicationRole, Guid,ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin,ApplicationRoleClaim, ApplicationUserToken>, IPlaygroundDbContext
 {
     private readonly DatabaseChangesInterceptor _interceptor;
-
+    
+    //Domain Models
     public virtual DbSet<User> Users { get; set; }
-    public virtual DbSet<ApplicationUser> ApplicationUsers { get; set; }
-    public virtual DbSet<ApplicationRole> ApplicationRoles { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options, DatabaseChangesInterceptor interceptor) 
         : base(options)
@@ -32,10 +33,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser,Applicatio
 
 public interface IPlaygroundDbContext
 {
-    //Identity 
-    DbSet<ApplicationUser> ApplicationUsers { get; set; }
-    DbSet<ApplicationRole> ApplicationRoles { get; set; }
-
+    
     //Domain Models
     DbSet<User> Users { get; set; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken);
